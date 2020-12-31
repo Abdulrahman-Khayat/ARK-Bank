@@ -1,0 +1,123 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+        <div class="item">
+            <div class="title2">
+                <span style="font-size: 18px; ">Beneficiaries </span>
+                <span><button type="button" data-toggle="modal" data-target="#addBeneficiary"> <i style="margin-right: 10px;" class="fa fa-user-plus" aria-hidden="true"></i>Add</button></span>
+            </div>
+
+            <table class="table table-hover ">
+                <thead style="font-size: 13px;">
+                    <th style="padding-left: 0px !important; padding-right: 0px !important;">#</th>
+                    <th style="padding-left: 0px !important; padding-right: 0px !important;">Name</th>
+                    <th style="padding-left: 0px !important; padding-right: 0px !important;">Action</th>
+                   
+                </thead>
+                 <tbody >
+                   {% for item in result %}
+                   
+                        <tr style="font-size: 13px;">
+                            <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.count}} </td>
+                            <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.name}}</td>
+                           
+                            <td style="padding-left: 0px !important; padding-right: 0px !important;">
+                                <form action="{{url_for('delete_ben', id=item.count)}}" method="POST">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                </form>
+                            
+                            </td>
+    
+                        
+                        </tr>
+                        
+                    {% endfor %}
+                
+                    
+                </tbody>
+
+            </table>
+        </div>
+
+    
+
+
+
+<!-- Modal -->
+<div class="modal fade"  id="addBeneficiary" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" style="width: 30%;">
+<div class="modal-content">
+    <div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLabel"><b>Add Beneficiary</b></h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <form action="" method="POST">        
+    <div class="modal-body" style="width:100%">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+
+
+        
+        <div style="width: 100%;" >
+            <label style="width: 100%;" for="">Account Number *</label>
+
+            {% if form.acc_no.errors %}
+                <input style="width: 100% !important;" class="inputs form-control is-invalid" type="text" name="acc_no" maxlength="10" onkeypress="return onlyNumberKey(event)">
+                <div class="invalid-feedback" style="margin-left: 40%;">
+                    {% for error in form.acc_no.errors %}
+                        <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <input style="width: 100% !important;" class="inputs form-control " type="text" name="acc_no" maxlength="10" onkeypress="return onlyNumberKey(event)">
+            {% endif %}	   
+        
+        
+        </div>
+
+
+        <div style="width: 100%;" >
+            <label style="width: 100%;" for=""></label>Beneficiary Username *</label>
+
+            {% if form.username.errors %}
+                <input style="width: 100% !important;" class="inputs form-control is-invalid"  type="text" name="username"  maxlength="20">
+                <div class="invalid-feedback" style="margin-left: 40%;">
+                    {% for error in form.username.errors %}
+                        <span style="color:red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+             <input style="width: 100% !important;" class="inputs form-control"  type="text" name="username"  maxlength="20">
+
+            {% endif %}	 
+            </div>
+
+            <br>
+    <p style="color: gray;font-size: 12px;"> **Username and Account Number must match.</p>
+    <div class="modal-footer">
+        <button type="button" class="buttons" style="background-color: rgb(240, 89, 89) ;" data-dismiss="modal">Close</button>
+        <input type="submit" value="Add" name="submit" class="buttons">
+    </div>
+</div>
+</form>
+
+</div>
+</div>
+</div>
+
+<script> 
+
+    function onlyNumberKey(evt) { 
+          
+        // Only ASCII charactar in that range allowed 
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57)) 
+            return false; 
+        return true; 
+    } 
+</script>
+
+{% endblock content %}
+

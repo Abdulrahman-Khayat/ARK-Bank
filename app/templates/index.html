@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../static/login/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--==========================================	=====================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/login/css/main.css">
+<!--===============================================================================================-->
+<style>
+    .form-control.is-invalid:focus, .was-validated :invalid.form-control {
+        border-color: #DDDDDD !important;
+        background-image: inherit !important;
+		box-shadow: inherit !important;
+		 color: white !important; 
+	} 
+	 .form-control.is-invalid::placeholder {
+		color: transparent;
+		}  
+	.form-control.is-invalid:focus::placeholder {
+		color: transparent;
+		}
+	.was-validated::placeholder{
+		color: white !important;
+	}
+	.input100::placeholder{
+		color: gray !important	;
+	}
+	.input100:focus::placeholder{
+		color: transparent !important;
+	}
+	.form-control::placeholder{
+		color: #ebdefd !important;
+	}
+</style>
+</head>
+<body>
+	 
+	<div class="limiter">
+		
+		<div class="container-login100" style="background-image: url('../static/login/images/bg-01.jpg');">
+			{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages%}
+                    <div style="width: 500px; text-align: center;" class="alert alert-{{ category }}">
+                        {{message}}
+
+                    </div>
+                {% endfor %}   
+            {% endif %}
+        {% endwith %}
+			<div class="wrap-login100">
+				<form class="login100-form " method="POST">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+					<span class="login100-form-logo">
+						<i class="fa fa-bank"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+
+					<div class="wrap-input100">
+
+						{% if form.username.errors %}
+							<!-- <input class="is-invalid form-control input100" style="background-color: transparent; border:none;color: white;" type="text" name="username" placeholder="Username"> -->
+							{{form.username(class="is-invalid form-control input100", style="background-color: transparent; border:none;color: white;", placeholder="Username", required=false)}}
+							<span class="focus-input100" style="color: white;" data-placeholder="&#xf207;"></span>
+							<div class="invalid-feedback">
+								{% for error in form.username.errors %}
+									<span style="color:#ff8383;">{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% else %}
+						{{form.username(class="form-control input100", style="background-color: transparent; border:none;color: white;", placeholder="Username", required=false)}}
+						<span class="focus-input100" style="color: white;" data-placeholder="&#xf207;"></span>
+						{% endif %}	
+						
+					</div>
+
+					<div class="wrap-input100" >
+						{% if form.password.errors %}
+							<input class="is-invalid form-control input100" style="background-color: transparent; border:none;color: white;" type="password" name="password" placeholder="Password">
+							<span class="focus-input100" style="color: white;" data-placeholder="&#xf191;"></span>
+							<div class="invalid-feedback">
+								{% for error in form.password.errors%}
+									<span style="color:#ff8383;">{{ error }}</span>
+								{% endfor%}
+							</div>
+							{% else %}
+								<input class="input100 form-control" style="background-color: transparent; border:none;color: white;" type="password" name="password" placeholder="Password">
+								<span class="focus-input100" style="color: white;" data-placeholder="&#xf191;"></span>
+							{% endif %}
+					</div>
+
+					<div class="contact100-form-checkbox">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember">
+						<label class="label-checkbox100" for="ckb1">
+							Remember me
+						</label>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button style="color: white;" name="login" class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+					
+					<div class="text-center p-t-90">
+						<span style="color:white" class="txt1">Forgot</span>
+						<a class="txt1" href="{{url_for('forgot', type='password') }}">
+							 Password
+						</a>
+						<span style="color:white" class="txt1">Or</span>
+	
+						<a class="txt1" href="{{url_for('forgot', type='username') }}">
+							Username?
+					   </a>
+					</div>
+					<div class="text-center ">
+						<a class="txt1" href="/register">
+							Create Account
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/login/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/js/main.js"></script>
+
+</body>
+</html>

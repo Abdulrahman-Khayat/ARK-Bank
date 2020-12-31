@@ -1,0 +1,71 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+    <div class="item card2">
+        <div class="title" style="margin-bottom: 10px;">
+            <span style="font-size: 22px;font-weight: bold; margin-bottom: 20px;">Transactions</span>
+        </div>
+
+        <table  class="table table-hover ">
+            <thead style="font-size: 13px;">
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 14%;">Transaction ID</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 15%;">Date</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important;">Amount (SAR)</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 12%;">Type</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 23%;">From</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important;width: 23%;">To</th>
+            </thead>
+            <tbody >
+               
+               {% for item in result %}
+               
+                    <tr style="font-size: 13px;">
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.trans_ID}} </td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.date}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.amount}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.type}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.from}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.to}}</td>
+                    </tr>
+                    
+                {% endfor %}
+            
+                
+            </tbody>
+
+        </table>
+
+    </div>
+
+    
+
+    <script> 
+        var count = 0;
+        var dotEntered = false;
+        function onlyNumberKeyAndPeriod(evt) { 
+              console.log(count);
+            // Only ASCII charactar in that range allowed 
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+            if(ASCIICode == 46 && !dotEntered){
+                dotEntered = true;
+                return true;
+            
+            }
+            if ((ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))) 
+                return false; 
+            
+            if(dotEntered && count != 2){
+                count++;
+                return true;
+            }
+            if(count == 2)
+                return false;
+
+            return true; 
+        } 
+    </script>
+
+
+
+{% endblock content %}
+
+

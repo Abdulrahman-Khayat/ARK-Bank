@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="../../static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        $(document).ready(function(){
+            $(".hamburger").click(function(){
+                $(".wrapper1").toggleClass("collapse2"); 
+            });
+        });
+    </script> 
+
+</head>
+<body style="background: ('../images/bg-01.jpg')">
+<div class="wrapper1">
+    <div class="top-navbar">
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="top-menu">
+            <div class="logo">ARK Bank</div>
+            <ul>
+                <li><a href=""><i class="fa fa-bell" aria-hidden="true" style="margin-top:7px;" ></i></a></li>
+                <li><a href="/profile"><i class="fa fa-user" style="margin-top:7px;" aria-hidden="true"></i></a></li>
+                <li><a href="/logout"><i class="iconify" data-icon="mdi:logout"  style="margin-top:7px; margin-left: 2px; font-size: 18px;" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sidebar1">
+        <ul>
+            <li><a href="/home">
+                <span class="icon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
+                <span class="title2">Dashboard</span>
+            </a></li>
+            <li><a href="/deposit">
+                <span class="icon"><i class="iconify" data-icon="vaadin:money-deposit" aria-hidden="true"></i></span>
+                <span class="title2">Deposit</span>
+            </a></li>
+            <li><a href="/transfer">
+                <span class="icon" ><i class="iconify" data-icon="vaadin:money-withdraw" aria-hidden="true"></i></span>
+                <span class="title2">Transfer</span>
+            </a></li>
+            <li><a href="/transactions">
+                <span class="icon"><i class="iconify" data-icon="vaadin:money-exchange" aria-hidden="true"></i></span>
+                <span class="title2">Transactions</span>
+            </a></li>
+            <li><a href="/beneficiaries">
+                <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <span class="title2">Beneficiaries</span>
+            </a></li>
+        </ul>
+    </div>
+    <div class="main-container1">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages%}
+                    <div class="alert alert-{{ category }}">
+                        {{message}}
+
+                    </div>
+                {% endfor %}   
+            {% endif %}
+        {% endwith %} 
+        {% block content %} {% endblock %}
+ 
+     
+      
+                
+        
+
+    </div>
+</div>
+
+</body>
+</html>
+
+

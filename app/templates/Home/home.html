@@ -1,0 +1,56 @@
+{% extends "layout/layout.html" %}
+{% block content %}
+    <div class="info">
+        <div class="name">
+            <img src="../../static/login/images/bg-01.jpg" alt="">
+            <div>
+                <p class="head" style="margin-bottom: 5px;">Welcome Back, {{ name }}!</p>
+                <p class="cont">Account ID: {{ acc_no }}</p>
+            </div>
+        </div>
+
+        <div>
+            <p class="cont" style="margin-bottom: 5px; margin-top: -5px;">Total Balance</p>
+            <p class="head">{{ balance }} SAR</p>
+        </div>
+
+    </div>
+
+    <div class="item">
+        <div class="title">
+            <span style="font-size: 18px;">Recent Transactions</span>
+            <span style="float:right"><a href="/transactions">View All</a></span>
+        </div>
+
+        <table  class="table table-hover ">
+            <thead style="font-size: 13px;">
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 14%;">Transaction ID</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 15%;">Date</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important;">Amount (SAR)</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 12%;">Type</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important; width: 23%;">From</th>
+                <th style="padding-left: 0px !important; padding-right: 0px !important;width: 23%;">To</th>
+            </thead>
+            <tbody >
+               
+               {% for item in result %}
+               
+                    <tr style="font-size: 13px;">
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.trans_ID}} </td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.date}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.amount}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.type}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.from}}</td>
+                        <td style="padding-left: 0px !important; padding-right: 0px !important;">{{item.to}}</td>
+                    </tr>
+                    
+                {% endfor %}
+            
+                
+            </tbody>
+
+        </table>
+    </div>
+
+    
+{% endblock content %}
