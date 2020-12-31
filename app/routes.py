@@ -114,7 +114,7 @@ def home():
 
     result = result[:3]
     print(len(result))
-    return render_template("home/home.html", name=name, acc_no=acc_no, balance=balance, result=result)
+    return render_template("home/home.html", name=name, acc_no=acc_no, balance=balance, result=result, title="Dashboard")
 
 @app.route("/deposit", methods=["GET", "POST"])
 @login_required
@@ -145,7 +145,7 @@ def deposit():
         
     
 
-        flash("Login unsuccessful. Please check username and password", 'success')
+        flash("Deposit successed", 'success')
     list=[]
     
     current_account = Account.query.filter_by(user_id=current_user.id).first().account_number
@@ -176,7 +176,7 @@ def deposit():
       
         i+=1
 
-    return render_template("deposit/deposit.html", form=form, result=result)
+    return render_template("deposit/deposit.html", form=form, result=result,title="Deposit")
 
 @app.route("/transfer", methods=["GET", "POST"])
 @login_required
@@ -268,7 +268,7 @@ def transfer():
 
 
 
-    return render_template("transfer/Transfer.html", form=form, ben=list, result=result)
+    return render_template("transfer/Transfer.html", form=form, ben=list, result=result, title="Transfer")
 
 @app.route("/transactions", methods=["GET", "POST"])
 @login_required
@@ -322,7 +322,7 @@ def transactions():
         i+=1
 
 
-    return render_template("/transactions/transactions.html", result=result)
+    return render_template("/transactions/transactions.html", result=result, title="Transation")
 
 @app.route("/beneficiaries", methods=["GET", "POST"])
 @login_required
@@ -373,7 +373,7 @@ def beneficiaries():
 
     
 
-    return render_template("beneficiaries/beneficiaries.html", form=form, result=result)
+    return render_template("beneficiaries/beneficiaries.html", form=form, result=result, title="Beneficiaries")
 
 @app.route("/delete_ben/<int:id>", methods=["POST"])
 @login_required
@@ -429,7 +429,7 @@ def profile():
 
    
     image_file = url_for('static', filename='login/images/'+ 'bg-01.jpg')
-    return render_template('profile/profile.html', title="profile", image_file=image_file, form=form)
+    return render_template('profile/profile.html',  image_file=image_file, form=form, title="Profile")
 
 
 def send_reset_email(user):
@@ -466,4 +466,4 @@ def reset(token):
         db.session.commit()
         flash('Your Password has been updated!!', 'success')
         return redirect(url_for('login'))
-    return render_template("reset.html", title="reset", form=form)
+    return render_template("reset.html", form=form, title="Reset")
