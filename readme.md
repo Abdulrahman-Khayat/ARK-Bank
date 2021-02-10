@@ -26,4 +26,4 @@ You can simply intsall the project into your machine and unzip it. Once you unzi
 
 * To run the project, open vscode terminal and use `py run.py` command.<br />
 * If this is your first time, you can create account and then login. 
-* If you want use the forgot password feature, you have to add the sender email and password into `*app.config['MAIL_USERNAME']*` and `*app.config['MAIL_PASSWORD']*` respectivly in "\_init\_.py" page.
+* If you want use the forgot password feature, you have to add the sender email and password into *`app.config['MAIL_USERNAME']`* and *`app.config['MAIL_PASSWORD']`* respectivly in "\_init\_.py" page.
